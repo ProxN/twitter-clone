@@ -1,4 +1,5 @@
 import { memo } from 'react';
+import Image from 'next/image';
 import { Heading } from '@components/elements/Heading';
 import { Icon } from '@components/elements/Icon';
 import { Text } from '@components/elements/Text';
@@ -22,7 +23,7 @@ const LoginScreen = () => {
         position='absolute'
         zIndex={10}
       >
-        <Icon name='twitter' />
+        <Image src='/twitter.svg' layout='fill' />
       </Center>
       <Center
         minH='100%'
