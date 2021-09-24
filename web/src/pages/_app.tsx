@@ -12,7 +12,7 @@ import { Box } from '@components/layout/Box';
 
 const App = (props: AppProps) => {
   const { Component, pageProps } = props;
-  const [colorMode, setColorMode] = useState<'light' | 'dark'>('light');
+  const [colorMode, setColorMode] = useState<'light' | 'dark'>('dark');
   const [queryClient] = useState(
     () =>
       new QueryClient({

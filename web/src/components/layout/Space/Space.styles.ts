@@ -5,6 +5,7 @@ import styled, {
   flexDirection,
   getSpace,
   compose,
+  width,
   margin,
   marginTop,
   marginBottom,
@@ -12,13 +13,15 @@ import styled, {
   MarginTopProps,
   MarginBottomProps,
   FlexDirectionProps,
+  WidthProps,
 } from '@xstyled/styled-components';
 
 export interface SpaceBaseProps
   extends MarginProps,
     MarginTopProps,
     MarginBottomProps,
-    FlexDirectionProps {
+    FlexDirectionProps,
+    WidthProps {
   /** if "true", set flex-wrap:wrap */
   $wrap?: boolean;
 
@@ -35,7 +38,8 @@ const SpaceSystem = compose(
   marginBottom,
   alignItems,
   justifyContent,
-  flexDirection
+  flexDirection,
+  width
 );
 
 export const SpaceContainer = styled.div.withConfig({

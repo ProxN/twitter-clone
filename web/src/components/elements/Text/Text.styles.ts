@@ -12,6 +12,8 @@ import styled, {
   LineHeightProps,
   space,
   SpaceProps,
+  maxWidth,
+  MaxWidthProps,
   css,
   th,
 } from '@xstyled/styled-components';
@@ -23,7 +25,8 @@ const TextSystem = compose(
   fontWeight,
   fontSize,
   lineHeight,
-  space
+  space,
+  maxWidth
 );
 
 export interface TextBaseProps
@@ -32,7 +35,8 @@ export interface TextBaseProps
     TextTransformProps,
     FontSizeProps,
     LineHeightProps,
-    SpaceProps {
+    SpaceProps,
+    MaxWidthProps {
   /** color from theme.colors */
   color?: string;
 

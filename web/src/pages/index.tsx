@@ -1,76 +1,53 @@
 import Link from 'next/link';
-import toast from 'react-hot-toast';
-import { useQueryClient } from 'react-query';
-import { useMeQuery, useLogoutMutation } from '@lib/graphql';
-import { client } from '@lib/utility/graphqlClient';
 import { Button } from '@components/elements/Button';
 import { Heading } from '@components/elements/Heading';
 import { Box } from '@components/layout/Box';
-import { Center } from '@components/layout/Center';
 import { Space } from '@components/layout/Space';
-import { Loader } from '@components/elements/Loader';
+import { Icon } from '@components/elements/Icon';
+import { Flex } from '@components/layout/Flex';
+import { Text } from '@components/elements/Text';
+import { LoginScreen } from '@components/templates/LoginScreen';
+import { WithNoUser } from '@lib/utility/withNoUser';
 
 const Index = () => {
-  const queryClient = useQueryClient();
-  const { data: user, isLoading } = useMeQuery(client, undefined, {
-    staleTime: 1000 * 60 * 60 * 24,
-  });
-
-  const { mutate, isLoading: logoutLoading } = useLogoutMutation(client, {
-    onSuccess: (data) => {
-      if (data.logout) {
-        queryClient.invalidateQueries('Me');
-        toast.success('Successfully logged out!');
-      }
-    },
-  });
-
   return (
-    <Box>
-      <Center minH='100vh'>
-        {isLoading ? (
-          <Loader />
-        ) : user?.me ? (
-          <Box>
-            <Heading mb={2} as='h1' size={{ xs: '2xl', md: '3xl' }}>
-              Hello, {user?.me.name}!
-            </Heading>
-            <Center>
-              <Button
-                isLoading={logoutLoading}
-                onClick={() => mutate({})}
-                variant='outline'
-              >
-                logout
+    <Box minH='100vh' display='flex'>
+      <LoginScreen />
+      <Box w={{ xs: '100%', md: '50%' }}>
+        <Flex
+          minH='100vh'
+          flexDirection='column'
+          justifyContent='center'
+          padding={{ xs: '0 1.5rem', sm: '0 5rem' }}
+        >
+          <Box h='4.5rem' w='4.5rem' color='#228be6' mb='2rem'>
+            <Icon name='twitter' />
+          </Box>
+          <Heading size={{ xs: '5xl', md: '6xl' }}>Happening now</Heading>
+          <Text size='2xl' fontWeight={500} mt='2rem'>
+            Join Twitter today.
+          </Text>
+          <Space
+            mt='2rem'
+            w={{ xs: '100%', sm: '30rem' }}
+            size={4}
+            flexDirection='column'
+          >
+            <Link href='/login'>
+              <Button fullWidth as='a' isPrimary>
+                Sign up
               </Button>
-            </Center>
-          </Box>
-        ) : (
-          <Box>
-            <Heading
-              textAlign={{ xs: 'center' }}
-              as='h1'
-              size={{ xs: '3xl', md: '4xl' }}
-            >
-              Welcome to the Fullstack boilerplate
-            </Heading>
-            <Space mt='1rem' justifyContent='center'>
-              <Link href='/login'>
-                <Button as='a' variant='ghost'>
-                  Log in
-                </Button>
-              </Link>
-              <Link href='/signup'>
-                <Button as='a' color='violet'>
-                  Sign up
-                </Button>
-              </Link>
-            </Space>
-          </Box>
-        )}
-      </Center>
+            </Link>
+            <Link href='/login'>
+              <Button fullWidth as='a' variant='ghost' isPrimary>
+                Sign in
+              </Button>
+            </Link>
+          </Space>
+        </Flex>
+      </Box>
     </Box>
   );
 };
 
-export default Index;
+export default WithNoUser(Index);

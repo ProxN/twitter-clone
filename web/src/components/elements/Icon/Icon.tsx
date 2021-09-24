@@ -1,5 +1,6 @@
 import { memo, useMemo } from 'react';
 import dynamic from 'next/dynamic';
+import Image from 'next/image';
 
 interface IconProps {
   name: string;

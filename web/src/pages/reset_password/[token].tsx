@@ -37,7 +37,7 @@ const ResetPassword = () => {
         queryClient.setQueryData<MeQuery>(['Me', null], {
           me: data.resetPassword.user,
         });
-        router.push('/');
+        router.push('/home');
       }
     },
   });
